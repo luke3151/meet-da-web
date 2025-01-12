@@ -12,6 +12,7 @@ import Settings from "@/pages/Mypage/Settings";
 import Emoji from "@/pages/Mypage/Theme/TabMenu/Emoji";
 import Font from "@/pages/Mypage/Theme/TabMenu/Font";
 import Own from "@/pages/Mypage/Theme/TabMenu/Own";
+import BoardWrite from "@/pages/board/new/BoardWrite";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/feed",
         element: <FeedPage />,
+      },
+      {
+        path: "/board/new",
+        element: <BoardWrite />,
       },
       {
         path: "/mypage",
