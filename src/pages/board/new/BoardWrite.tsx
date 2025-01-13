@@ -1,8 +1,9 @@
 import ReactQuill from "react-quill"
 import 'quill/dist/quill.snow.css';
 import styled from "styled-components"
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dropdownImg from "../../../assets/images/dropdown.svg"
+import axios from "axios";
 
 export default function BoardWrite(){
 
@@ -337,7 +338,28 @@ export default function BoardWrite(){
     // 드롭다운 아이템 목록
     const items = ['전체 공개', '서로 믿음 공개', '비공개'];
 
-    
+    const handleSubmit = async () => {
+        const postData = {
+            title: "제목", // 제목 설정
+            content: content,
+            images: [], // 이미지 배열 (필요에 따라 추가)
+            visibility: "PUBLIC", // 가시성
+            author: "test@test.com" // 테스트용 이메일
+        };
+
+        try {
+            const response = await axios.post('https://api.meet-da.site/board', postData);
+            if (response.status === 201) {
+                console.log("게시글 작성 성공", response.data);
+                // 작성 후 처리 (예: 리다이렉션)
+            }else{
+                console.error("예상치 못한 응답 코드:", response.data);
+            }
+        } catch (error) {
+            console.error("게시글 작성 실패", error);
+            alert("게시글 작성 중 오류가 발생했습니다.");
+        }
+    };
 
     return(
         <Wrap>
@@ -381,7 +403,7 @@ export default function BoardWrite(){
             </WriteEmotion>
             <ButtonWrap>
                 <button>취소</button>
-                <button>등록</button>
+                <button onClick={handleSubmit}>등록</button>
             </ButtonWrap>
         </Wrap>
     )
