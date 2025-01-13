@@ -13,6 +13,8 @@ import Emoji from "@/pages/Mypage/Theme/TabMenu/Emoji";
 import Font from "@/pages/Mypage/Theme/TabMenu/Font";
 import Own from "@/pages/Mypage/Theme/TabMenu/Own";
 import BoardWrite from "@/pages/board/new/BoardWrite";
+import BoardDetail from "@/pages/board/[boardId]/Detail";
+
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +35,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/board/new",
-        element: <BoardWrite />,
+        element: <BoardWrite isEdit={false} />,
+      },
+      {
+        path: "/board/edit/:boardId",
+        element: <BoardWrite isEdit={true} />,
+      },
+      {
+        path: "/board/:boardId",
+        element: <BoardDetail />,
       },
       {
         path: "/mypage",
